@@ -1,1 +1,1 @@
- This is a tutorial project I've been working on that has really improved my programatic and logicial skills when coding iOS apps. It is essentially an instagram rebuilt and as been a lot of fun building so far.
+ This is a tutorial project I've been working on that has really improved my programatic and logicial skills when coding iOS apps. It is essentially an instagram rebuild and as been a lot of fun building so far.
