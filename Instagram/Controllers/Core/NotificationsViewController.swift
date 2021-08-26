@@ -12,9 +12,7 @@ class NotificationsViewController: UIViewController, UITableViewDataSource, UITa
     
     
     
-    
-    
-   
+
     
   
     private let noNotificationsLabel : UILabel = {
@@ -54,8 +52,8 @@ class NotificationsViewController: UIViewController, UITableViewDataSource, UITa
         view.addSubview(noNotificationsLabel)
         tableView.delegate = self
         tableView.dataSource = self
-//        fetchNotifications()
-        mock()
+        fetchNotifications()
+//        mock()
         
     }
     
@@ -160,6 +158,7 @@ class NotificationsViewController: UIViewController, UITableViewDataSource, UITa
             
             cell.configure(with: follower)
             
+            
             cell.delegate = self
             
             return cell
@@ -260,7 +259,7 @@ class NotificationsViewController: UIViewController, UITableViewDataSource, UITa
                     
                 }
 
-                let vc = PostViewController(post: post)
+                let vc = PostViewController(post: post, owner: username)
                 
                 self?.navigationController?.pushViewController(vc, animated: true)
             }
@@ -296,7 +295,9 @@ class NotificationsViewController: UIViewController, UITableViewDataSource, UITa
         
         let username = post.username
         
-        DatabaseManager.shared.updateRelationship(state: isFollowing ? .unfollow : .follow, for: username) { success in
+        
+        
+        DatabaseManager.shared.updateRelationship(state: isFollowing ? .follow : .unfollow, for: username) { success in
 
         }
         
@@ -329,3 +330,5 @@ class NotificationsViewController: UIViewController, UITableViewDataSource, UITa
     
 
 }
+
+

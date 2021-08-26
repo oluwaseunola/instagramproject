@@ -37,6 +37,7 @@ class CaptionViewController: UIViewController, UITextViewDelegate {
     init(image: UIImage) {
         self.image = image
         super.init(nibName: nil, bundle: nil)
+
     }
     
     required init?(coder: NSCoder) {
@@ -52,6 +53,7 @@ class CaptionViewController: UIViewController, UITextViewDelegate {
         view.addSubview(imageView)
         view.addSubview(textView)
         imageView.image = self.image
+        view.backgroundColor = .systemBackground
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Post", style: .done, target: self, action: #selector(didTapPostButton))
 
@@ -99,7 +101,7 @@ class CaptionViewController: UIViewController, UITextViewDelegate {
                     self?.tabBarController?.selectedIndex = 0
                     self?.navigationController?.popToRootViewController(animated: true)
                     
-                    
+                    NotificationCenter.default.post(name: .didPostNotification, object: nil)
                 }
                 
                 

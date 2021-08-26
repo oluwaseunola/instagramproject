@@ -9,13 +9,13 @@ import UIKit
 
 protocol PostCollectionViewCellDelegate: AnyObject{
     
-    func didTapLike(_ cell: PostCollectionViewCell)
+    func didTapLike(_ cell: PostCollectionViewCell, index: Int)
     
 }
 
 class PostCollectionViewCell: UICollectionViewCell {
     static let identifier = "PostCollectionViewCell"
-    
+    private var index = 0
     weak var delegate : PostCollectionViewCellDelegate?
     
     private let image : UIImageView = {
@@ -73,13 +73,21 @@ class PostCollectionViewCell: UICollectionViewCell {
         image.image = nil
     }
     
-    public func configure(with model: PostCollectionViewModel){
+    public func configure(with model: PostCollectionViewModel, index: Int){
+       
+        self.index = index
+        
         image.sd_setImage(with: model.post, completed: nil)
+    }
+    
+    public func configureMock(with mockImage: UIImage){
+        image.image = mockImage
     }
     
     @objc func didDoubleTapPost(){
         
-        delegate?.didTapLike(self)
+        
+        delegate?.didTapLike(self, index: index)
         
         heartImage.isHidden = false
         

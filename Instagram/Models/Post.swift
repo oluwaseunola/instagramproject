@@ -15,7 +15,7 @@ struct Post:Codable {
     
     let date : String
     
-    let likers : [String]
+    var likers : [String]
     
     let postDownloadURL : String
     

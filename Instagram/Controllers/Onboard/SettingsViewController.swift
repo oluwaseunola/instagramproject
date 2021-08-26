@@ -5,6 +5,7 @@
 //  Created by Seun Olalekan on 2021-07-15.
 //
 
+import SafariServices
 import UIKit
 
 class SettingsViewController: UIViewController {
@@ -14,6 +15,8 @@ class SettingsViewController: UIViewController {
         
         return tableView
     }()
+    
+    private var sections : [SettingsSections] = []
     
     let signOutLabel : UILabel = {
         let label = UILabel()
@@ -29,6 +32,7 @@ class SettingsViewController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(didTapClose))
 
         view.addSubview(tableView)
+        configureModels()
         tableView.delegate = self
         tableView.dataSource = self
         configureTableFooter()
@@ -36,6 +40,8 @@ class SettingsViewController: UIViewController {
         gesture.numberOfTapsRequired = 1
         signOutLabel.addGestureRecognizer(gesture)
         signOutLabel.isUserInteractionEnabled = true
+        
+        
         
         
     }
@@ -96,20 +102,99 @@ class SettingsViewController: UIViewController {
         tableView.tableFooterView = footer
     }
     
+    
+    private func configureModels(){
+        
+        guard let url = URL(string: "https://help.instagram.com/519522125107875") else {return}
+        
+        sections.append(SettingsSections(title: "App", options: [SettingOptions(title: "Rate App", image: UIImage(systemName: "star"), handler: {
+            
+            
+            let controller = SFSafariViewController(url: url )
+            
+            self.present(controller, animated: true, completion: nil)
+            
+        }), SettingOptions(title: "Share App", image: UIImage(systemName: "square.and.arrow.up"), handler: {
+            
+            
+            
+            let controller = UIActivityViewController(activityItems: ["Share", url ], applicationActivities: [])
+            
+            self.present(controller, animated: true, completion: nil)
+            
+        })]))
+        
+        sections.append(SettingsSections(title: "Information", options: [SettingOptions(title: "Terms of Service ", image: UIImage(systemName: "doc.text.magnifyingglass"), handler: {
+            
+            
+           
+            let controller = SFSafariViewController(url: url )
+            
+            self.present(controller, animated: true, completion: nil)
+        }), SettingOptions(title: "Privacy Policy", image: UIImage(systemName: "hand.raised"), handler: {
+            
+           
+           
+            let controller = SFSafariViewController(url: url )
+            
+            self.present(controller, animated: true, completion: nil)
+            
+        })]))
+        
+        
+
+                           
+                           
 
 
+}
 }
 
 extension SettingsViewController: UITableViewDelegate, UITableViewDataSource
 {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return sections[section].options.count
+    }
+    
+func numberOfSections(in tableView: UITableView) -> Int {
+        return sections.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        return UITableViewCell()
+        let model = sections[indexPath.section].options[indexPath.row]
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        
+        cell.textLabel?.text = model.title
+        
+        cell.imageView?.image = model.image
+        
+        cell.accessoryType = .disclosureIndicator
+        
+        
+        
+        
+        
+    
+        return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       
+        tableView.deselectRow(at: indexPath, animated: true)
+        let model = sections[indexPath.section].options[indexPath.row]
+        model.handler()
+        
+        
+        
+    }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+       
+        let title = sections[section].title
+        
+        return title
+    }
 }
+

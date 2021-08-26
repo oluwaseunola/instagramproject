@@ -35,8 +35,11 @@ class AuthManager {
             }
             
             self?.auth.signIn(withEmail: email, password: password) { result, error in
+                guard let error = error else{return}
+                
                 guard  result != nil else{
                     print("no results")
+                    completion(.failure(error))
                     return}
             }
             

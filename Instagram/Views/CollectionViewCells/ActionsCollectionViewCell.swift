@@ -8,15 +8,17 @@
 import UIKit
 
 protocol ActionsCollectionViewCellDelegate: AnyObject{
-    func didTapLikeButton(_ cell: ActionsCollectionViewCell, isLiked: Bool )
-    func didTapCommentButton(_ cell: ActionsCollectionViewCell )
-    func didTapShareButton(_ cell: ActionsCollectionViewCell )
+    func didTapLikeButton(_ cell: ActionsCollectionViewCell, isLiked: Bool, index: Int )
+    func didTapCommentButton(_ cell: ActionsCollectionViewCell, index: Int)
+    func didTapShareButton(_ cell: ActionsCollectionViewCell, index: Int )
 
 }
 class ActionsCollectionViewCell: UICollectionViewCell {
      static let identifier = "ActionsCollectionViewCell"
     
     private var isLiked = false
+    
+    private var index = 0
     
     weak var delegate : ActionsCollectionViewCellDelegate?
     
@@ -81,7 +83,7 @@ class ActionsCollectionViewCell: UICollectionViewCell {
 
         }
         
-        delegate?.didTapLikeButton(self, isLiked: !self.isLiked)
+        delegate?.didTapLikeButton(self, isLiked: !self.isLiked, index: self.index)
         
         self.isLiked = !self.isLiked
         
@@ -89,13 +91,13 @@ class ActionsCollectionViewCell: UICollectionViewCell {
     
     @objc func didTapCommentButton(){
         
-        delegate?.didTapCommentButton(self)
+        delegate?.didTapCommentButton(self, index: self.index)
         
     }
     
     @objc func didTapShareButton(){
         
-        delegate?.didTapShareButton(self)
+        delegate?.didTapShareButton(self, index: self.index)
         
     }
     
@@ -115,8 +117,10 @@ class ActionsCollectionViewCell: UICollectionViewCell {
 
     }
     
-    public func configure(with model: ActionsViewModel){
+    public func configure(with model: ActionsViewModel, index: Int){
         isLiked = model.isLiked
+        
+        self.index = index
         
     }
 }

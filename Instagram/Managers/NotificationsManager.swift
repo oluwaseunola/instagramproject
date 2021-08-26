@@ -45,6 +45,15 @@ class NotificationsManager {
         
         
     }
+    
+    static func setIdentifier()->String{
+        
+        let num1 = Int.random(in: 0...1000)
+        let num2 = Int.random(in: 0...1000)
+        let id = "\(num1)_\(num2)_\(Date().timeIntervalSince1970)"
+        
+        return id
+    }
    
 
 }

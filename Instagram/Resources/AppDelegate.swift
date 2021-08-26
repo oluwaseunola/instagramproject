@@ -16,6 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
+        
+//        dummy data
+//        let id = NotificationsManager.setIdentifier()
+//        let model = IGNotificaton(username: "KingJames", notificationType: 3, profilePic: "https://img.jamesedition.com/listing_images/2021/05/14/12/53/52/af1e4ff6-acac-40ae-9488-e11e53b0b573/je/1040x620xc.jpg", postURL: "https://img.jamesedition.com/listing_images/2021/05/14/12/53/52/af1e4ff6-acac-40ae-9488-e11e53b0b573/je/1040x620xc.jpg", postID: "123", isFollowing: true, timeStamp: Date().makeDate(date: Date()) ?? "J", identifier: id)
+//
+//        NotificationsManager.shared.createNotification(notification: model, for: "SeunOlalekan")
         return true
     }
 

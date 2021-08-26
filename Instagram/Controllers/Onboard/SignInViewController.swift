@@ -225,13 +225,15 @@ class LoginViewController: UIViewController {
                 switch result{
                     
                 case.success:
+                    
+                    HapticsViewController.shared.vibrate(for: .success)
                     let vc = TabViewController()
                     let navVC = UINavigationController(rootViewController: vc)
                     navVC.modalPresentationStyle = .fullScreen
                     self?.present(navVC, animated: true, completion: nil)
                     
                 case.failure(let error):
-                    
+                    HapticsViewController.shared.vibrate(for: .error)
                     let alert = UIAlertController(title: "Error", message: "There was an error logging you in.", preferredStyle: .alert)
                     let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
                     alert.addAction(ok)

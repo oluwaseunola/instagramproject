@@ -12,7 +12,7 @@ enum HomeViewCellsType{
     case poster(viewModel: PosterCollectionViewModel)
     case post(viewModel: PostCollectionViewModel)
     case actions(viewModel: ActionsViewModel)
-    case likes(viewModel:CommentsViewModel )
+    case likes(viewModel:LikesViewModel )
     case caption(viewModel: CaptionCollectionViewModel)
     case timeStamp(viewModel: DateTimeCollectionViewModel)
     

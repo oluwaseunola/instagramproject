@@ -99,7 +99,7 @@ class FollowNotificationTableViewCell: UITableViewCell {
         
         let labelSize = label.sizeThatFits(CGSize(width: contentView.width - profilePic.width - followButton.width - 22, height: contentView.height))
         
-        label.frame = CGRect(x: profilePic.right + 10, y: 0, width: labelSize.width, height: contentView.height)
+        label.frame = CGRect(x: profilePic.right + 10, y: 0, width: labelSize.width-followButton.width, height: contentView.height)
         
         followButton.sizeToFit()
         
@@ -133,13 +133,13 @@ class FollowNotificationTableViewCell: UITableViewCell {
     private func updateButton(){
         
         
-        followButton.setTitle(isFollowing ? "Following" : "Follow", for: .normal)
+        followButton.setTitle(self.isFollowing ? "Following" : "Follow", for: .normal)
         
-        followButton.backgroundColor = isFollowing ? .systemBackground : .systemBlue
+        followButton.backgroundColor = self.isFollowing ? .systemBackground : .systemBlue
         
-        followButton.layer.borderWidth  = isFollowing ? 2 : 0
+        followButton.layer.borderWidth  = self.isFollowing ? 2 : 0
         
-        followButton.layer.borderColor  = isFollowing ? UIColor.secondaryLabel.cgColor : .none
+        followButton.layer.borderColor  = self.isFollowing ? UIColor.secondaryLabel.cgColor : .none
         
     }
     
@@ -148,11 +148,12 @@ class FollowNotificationTableViewCell: UITableViewCell {
         guard let vm = viewModel else {
             return
         }
+        
 
         
         delegate?.didTapFollower(cell: self, isFollowing: !self.isFollowing, post: vm)
         
-        isFollowing = !isFollowing
+        self.isFollowing = !self.isFollowing
     
         updateButton()
     }
@@ -161,14 +162,15 @@ class FollowNotificationTableViewCell: UITableViewCell {
 
     
     public func configure(with model: FollowNotificatoinViewModel ){
+        self.viewModel = model
         isFollowing = model.followStatus
         
         profilePic.sd_setImage(with: model.profilePic, completed: nil)
         timeStamp.text = model.timeStamp
 
         
-//        label.text = "\(model.username) started following you"
-        label.text = "BenBaller started following you"
+        label.text = "\(model.username) started following you"
+        
       
         
         updateButton()

@@ -1,0 +1,20 @@
+${PODS_ROOT}/Target Support Files/Pods-InstagramTest/Pods-InstagramTest-frameworks.sh
+${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC-iOS15.0/openssl_grpc.framework
+${BUILT_PRODUCTS_DIR}/FirebaseAuth-iOS15.0/FirebaseAuth.framework
+${BUILT_PRODUCTS_DIR}/FirebaseCore-iOS15.0/FirebaseCore.framework
+${BUILT_PRODUCTS_DIR}/FirebaseCoreDiagnostics-iOS15.0/FirebaseCoreDiagnostics.framework
+${BUILT_PRODUCTS_DIR}/FirebaseCrashlytics-iOS15.0/FirebaseCrashlytics.framework
+${BUILT_PRODUCTS_DIR}/FirebaseDatabase-iOS15.0/FirebaseDatabase.framework
+${BUILT_PRODUCTS_DIR}/FirebaseFirestore-iOS15.0/FirebaseFirestore.framework
+${BUILT_PRODUCTS_DIR}/FirebaseInstallations-iOS15.0/FirebaseInstallations.framework
+${BUILT_PRODUCTS_DIR}/FirebaseStorage-iOS15.0/FirebaseStorage.framework
+${BUILT_PRODUCTS_DIR}/GTMSessionFetcher-iOS15.0/GTMSessionFetcher.framework
+${BUILT_PRODUCTS_DIR}/GoogleDataTransport-iOS15.0/GoogleDataTransport.framework
+${BUILT_PRODUCTS_DIR}/GoogleUtilities-iOS15.0/GoogleUtilities.framework
+${BUILT_PRODUCTS_DIR}/PromisesObjC-iOS15.0/FBLPromises.framework
+${BUILT_PRODUCTS_DIR}/SDWebImage-iOS15.0/SDWebImage.framework
+${BUILT_PRODUCTS_DIR}/abseil-iOS15.0/absl.framework
+${BUILT_PRODUCTS_DIR}/gRPC-C++-iOS15.0/grpcpp.framework
+${BUILT_PRODUCTS_DIR}/gRPC-Core-iOS15.0/grpc.framework
+${BUILT_PRODUCTS_DIR}/leveldb-library-iOS15.0/leveldb.framework
+${BUILT_PRODUCTS_DIR}/nanopb-iOS15.0/nanopb.framework

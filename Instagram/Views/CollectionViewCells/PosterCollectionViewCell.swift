@@ -8,7 +8,7 @@ import SDWebImage
 import UIKit
 
 protocol PosterCollectionViewCellDelegate: AnyObject {
-    func posterCollectionViewCellDidtapMore(_ cell: PosterCollectionViewCell)
+    func posterCollectionViewCellDidtapMore(_ cell: PosterCollectionViewCell, index: Int)
     func didTapUsername(_ cell: PosterCollectionViewCell)
     
 }
@@ -17,6 +17,8 @@ class PosterCollectionViewCell: UICollectionViewCell {
     static let identifier = "PosterCollectionViewCell"
     
     weak var delegate : PosterCollectionViewCellDelegate?
+    
+    private var index = 0
     
     private let profilePic : UIImageView = {
         let view = UIImageView()
@@ -90,13 +92,12 @@ class PosterCollectionViewCell: UICollectionViewCell {
         
         
         
+        
     }
     
     @objc func didTapOptionsButton(){
-        
-        let actionSheet = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
-        
-        delegate?.posterCollectionViewCellDidtapMore(self)
+            
+        delegate?.posterCollectionViewCellDidtapMore(self, index: self.index)
         
         
         
@@ -119,11 +120,13 @@ class PosterCollectionViewCell: UICollectionViewCell {
         username.text = nil
     }
     
-    public func configure(with model: PosterCollectionViewModel){
+    public func configure(with model: PosterCollectionViewModel, index: Int){
         
         username.text = model.username
         
         profilePic.sd_setImage(with: model.image, completed: nil)
+        
+        self.index = index
         
         
     }

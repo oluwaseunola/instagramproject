@@ -10,6 +10,7 @@ import UIKit
 class ExploreViewController: UIViewController, UISearchResultsUpdating, SearchResultsViewControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
  
     private var collectionPosts = [Post]()
+    private var collectionUsers = [User]()
     
    
     private let collectionView : UICollectionView = {
@@ -66,6 +67,7 @@ class ExploreViewController: UIViewController, UISearchResultsUpdating, SearchRe
         collectionView.dataSource = self
         
         fetchData()
+        updateSearchResults(for: searchController)
         
         
     }
@@ -75,13 +77,15 @@ class ExploreViewController: UIViewController, UISearchResultsUpdating, SearchRe
               let term = searchController.searchBar.text,
         !term.trimmingCharacters(in: .whitespaces).isEmpty else{return}
         
+        
+        
 
         DatabaseManager.shared.queryUsers(with: term) { result in
-            
+
             resultsVC.update(with: result)
-            
-            
-            
+
+
+
         }
         
     }
@@ -90,10 +94,12 @@ class ExploreViewController: UIViewController, UISearchResultsUpdating, SearchRe
     
     private func fetchData(){
         
-        DatabaseManager.shared.explorePosts { [weak self] posts in
+        DatabaseManager.shared.explorePosts { [weak self] results in
             
             DispatchQueue.main.async {
-                self?.collectionPosts = posts
+                
+                self?.collectionPosts = results.compactMap({$0.post})
+                self?.collectionUsers = results.compactMap({$0.user})
                 self?.collectionView.reloadData()
             }
             
@@ -135,8 +141,9 @@ class ExploreViewController: UIViewController, UISearchResultsUpdating, SearchRe
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         let post = collectionPosts[indexPath.row]
+        let user = collectionUsers[indexPath.row]
         
-        let vc = PostViewController(post: post)
+        let vc = PostViewController(post: post, owner: user.username)
         
         navigationController?.pushViewController(vc, animated: true)
         

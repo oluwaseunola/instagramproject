@@ -17,10 +17,7 @@ struct IGNotificaton: Codable {
     let postID : String?
     let isFollowing : Bool?
     let timeStamp: String
-    var identifier: String {
-        
-        "\(username)_\(DatabaseManager.setIdentifier())"
-    }
+    var identifier: String
     
     
 }

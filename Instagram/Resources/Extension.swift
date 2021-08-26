@@ -103,4 +103,50 @@ extension Date {
     }
 }
 
+extension Notification.Name {
+    
+    static let didPostNotification = Notification.Name("didPostNotification")
+}
 
+extension NSMutableAttributedString{
+    var fontSize:CGFloat { return 16 }
+    var boldFont:UIFont { return UIFont(name: "SF-Pro", size: fontSize) ?? UIFont.boldSystemFont(ofSize: fontSize) }
+    var normalFont:UIFont { return UIFont(name: "SF-Pro", size: fontSize) ?? UIFont.systemFont(ofSize: fontSize)}
+
+    func bold(_ value:String) -> NSMutableAttributedString {
+            
+            let attributes:[NSAttributedString.Key : Any] = [
+                .font : boldFont
+            ]
+            
+            self.append(NSAttributedString(string: value, attributes:attributes))
+            return self
+        }
+    
+       func normal(_ value:String) -> NSMutableAttributedString {
+           
+           let attributes:[NSAttributedString.Key : Any] = [
+               .font : normalFont,
+           ]
+           
+           self.append(NSAttributedString(string: value, attributes:attributes))
+           return self
+       }
+}
+
+extension Array{
+    
+    
+    func find(array:[String] ,item: String)-> Int{
+        
+        for (index, value) in array.enumerated(){
+            
+            if item == value{
+                return index
+                
+            }
+            
+        }
+        return 0
+    }
+}
